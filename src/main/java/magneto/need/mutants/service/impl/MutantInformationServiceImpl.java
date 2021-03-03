@@ -61,4 +61,54 @@ public class MutantInformationServiceImpl implements MutantInformationService {
             return builder.toString();
         }
     }
+
+    @Override
+    public String getElementsFromDiagonalUp(Position position) {
+        char[][] dnaMatrix = this.mutantInformation.getDnaMatrix();
+        if (position == null || this.mutantInformation.getDnaMatrix() == null) {
+            return null;
+        } else if (dnaMatrix.length <= position.getX()) {
+            return null;
+        } else if (dnaMatrix[position.getX()].length <= position.getY()) {
+            return null;
+        } else {
+            StringBuilder builder = new StringBuilder();
+            int maxY = Math.min(position.getY() + 4, dnaMatrix.length);
+            int minX = Math.max(position.getX() - 4, 0);
+            int actualY = position.getY();
+            for (int i = position.getX(); i >= minX; i--) {
+                builder.append(dnaMatrix[i][actualY]);
+                actualY++;
+                if (actualY == maxY) {
+                    break;
+                }
+            }
+            return builder.toString();
+        }
+    }
+
+    @Override
+    public String getElementsFromDiagonalBottom(Position position) {
+        char[][] dnaMatrix = this.mutantInformation.getDnaMatrix();
+        if (position == null || this.mutantInformation.getDnaMatrix() == null) {
+            return null;
+        } else if (dnaMatrix.length <= position.getX()) {
+            return null;
+        } else if (dnaMatrix[position.getX()].length <= position.getY()) {
+            return null;
+        } else {
+            StringBuilder builder = new StringBuilder();
+            int maxX = Math.min(position.getX() + 4, dnaMatrix.length);
+            int maxY = Math.min(position.getY() + 4, dnaMatrix.length);
+            int actualY = position.getY();
+            for (int i = position.getX(); i < maxX; i++) {
+                builder.append(dnaMatrix[i][actualY]);
+                actualY++;
+                if (actualY == maxY) {
+                    break;
+                }
+            }
+            return builder.toString();
+        }
+    }
 }
