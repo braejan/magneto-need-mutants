@@ -5,9 +5,7 @@ import magneto.need.mutants.model.DnaSequence;
 import magneto.need.mutants.model.MutantInformation;
 import magneto.need.mutants.model.Position;
 import magneto.need.mutants.service.MutantInformationService;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 
 import javax.inject.Inject;
@@ -21,9 +19,7 @@ public class MutantInformationServiceTest {
     @Inject
     private MutantInformation mutantInformation;
 
-    @Test
-    public void test_a_update_mutant_information() {
-        this.mutantInformation.setSequences(null);
+    private void init() {
         DnaSequence sequence = new DnaSequence();
         sequence.setLetter("A");
         sequence.setPositions(new ArrayList<>());
@@ -34,6 +30,12 @@ public class MutantInformationServiceTest {
             sequence.getPositions().add(position);
         }
         mutantInformationService.updateMutantInformation(sequence);
+    }
+
+    @Test
+    public void test_a_update_mutant_information() {
+        this.mutantInformation.setSequences(null);
+        init();
         Assertions.assertEquals(1, mutantInformation.getSequences().size());
         Assertions.assertEquals(4, mutantInformation.getSequences().get(0).getPositions().size());
     }
@@ -41,16 +43,7 @@ public class MutantInformationServiceTest {
     @Test
     public void test_b_free_position() {
         if (this.mutantInformation.getSequences() == null) {
-            DnaSequence sequence = new DnaSequence();
-            sequence.setLetter("A");
-            sequence.setPositions(new ArrayList<>());
-            for (int i = 0; i < 4; i++) {
-                Position position = new Position();
-                position.setX(0);
-                position.setY(i);
-                sequence.getPositions().add(position);
-            }
-            mutantInformationService.updateMutantInformation(sequence);
+            init();
         }
         Position position = new Position();
         position.setX(0);
