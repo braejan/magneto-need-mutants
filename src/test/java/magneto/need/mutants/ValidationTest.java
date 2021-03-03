@@ -17,10 +17,8 @@ public class ValidationTest {
 
     @Test
     public void test_correct_input() {
-        Dna dna = new Dna();
-        dna.setDna(Arrays.asList("ATCG", "TCGA", "CGAT", "GATC"));
         try {
-            Validation.validate(dna);
+            Validation.validate(Arrays.asList("ATGCGA", "CAGTGC", "CAGTGC", "AGAAGG", "CCCCTA", "TCACTG"));
             Assertions.assertTrue(true);
         } catch (DimensionException e) {
             LOGGER.error("Error on test_correct_input", e);
@@ -31,26 +29,31 @@ public class ValidationTest {
     @Test
     public void test_incorrect_input() throws DimensionException {
         Assertions.assertThrows(DimensionException.class, () -> {
-            Dna dna = new Dna();
-            dna.setDna(Arrays.asList("ABCD", "ACBD", "ADCB", "ADCB", "BBBB"));
-            Validation.validate(dna);
+            Validation.validate(Arrays.asList("ABCD", "ACBD", "ADCB", "ADCB", "BBBB"));
         });
     }
 
     @Test
     public void test_incorrect_input_with_3_letters() throws DimensionException {
         Assertions.assertThrows(DimensionException.class, () -> {
-            Dna dna = new Dna();
-            dna.setDna(Arrays.asList("ABCD", "ACB", "ADCB", "ADB"));
-            Validation.validate(dna);
+            Validation.validate(Arrays.asList("ABCD", "ACB", "ADCB", "ADB"));
         });
     }
 
     @Test
-    public void test_has_unique_letters(){
+    public void test_has_unique_letters() {
         String input = "AAAAAAAAAAA";
         Assertions.assertTrue(Validation.hasUniqueLetter(input));
-        input =  "AAAAAAAAAAB";
+        input = "AAAAAAAAAAB";
         Assertions.assertFalse(Validation.hasUniqueLetter(input));
+    }
+
+    @Test
+    public void test_a_mutant_sequence() {
+        String input = "AAAA";
+        Assertions.assertTrue(Validation.isAMutantSequence(input));
+        input = "AAAAAAAAAAB";
+        Assertions.assertFalse(Validation.isAMutantSequence(input));
+        Assertions.assertFalse(Validation.isAMutantSequence(null));
     }
 }

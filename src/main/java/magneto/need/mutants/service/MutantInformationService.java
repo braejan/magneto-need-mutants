@@ -13,4 +13,6 @@ public interface MutantInformationService {
     public String getElementsFromDiagonalUp(Position position);
 
     public String getElementsFromDiagonalBottom(Position position);
+
+    public String getElementsFromBottom(Position position);
 }

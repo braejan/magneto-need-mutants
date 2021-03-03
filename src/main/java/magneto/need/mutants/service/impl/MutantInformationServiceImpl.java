@@ -4,6 +4,7 @@ import magneto.need.mutants.model.DnaSequence;
 import magneto.need.mutants.model.MutantInformation;
 import magneto.need.mutants.model.Position;
 import magneto.need.mutants.service.MutantInformationService;
+import magneto.need.mutants.validation.Validation;
 
 import javax.inject.Singleton;
 import java.util.ArrayList;
@@ -48,6 +49,8 @@ public class MutantInformationServiceImpl implements MutantInformationService {
         char[][] dnaMatrix = this.mutantInformation.getDnaMatrix();
         if (position == null || this.mutantInformation.getDnaMatrix() == null) {
             return null;
+        } else if (!isAFreePosition(position)) {
+            return null;
         } else if (dnaMatrix.length <= position.getX()) {
             return null;
         } else if (dnaMatrix[position.getX()].length <= position.getY()) {
@@ -66,6 +69,8 @@ public class MutantInformationServiceImpl implements MutantInformationService {
     public String getElementsFromDiagonalUp(Position position) {
         char[][] dnaMatrix = this.mutantInformation.getDnaMatrix();
         if (position == null || this.mutantInformation.getDnaMatrix() == null) {
+            return null;
+        } else if (!isAFreePosition(position)) {
             return null;
         } else if (dnaMatrix.length <= position.getX()) {
             return null;
@@ -92,6 +97,8 @@ public class MutantInformationServiceImpl implements MutantInformationService {
         char[][] dnaMatrix = this.mutantInformation.getDnaMatrix();
         if (position == null || this.mutantInformation.getDnaMatrix() == null) {
             return null;
+        } else if (!isAFreePosition(position)) {
+            return null;
         } else if (dnaMatrix.length <= position.getX()) {
             return null;
         } else if (dnaMatrix[position.getX()].length <= position.getY()) {
@@ -107,6 +114,28 @@ public class MutantInformationServiceImpl implements MutantInformationService {
                 if (actualY == maxY) {
                     break;
                 }
+            }
+            return builder.toString();
+        }
+    }
+
+    @Override
+    public String getElementsFromBottom(Position position) {
+        char[][] dnaMatrix = this.mutantInformation.getDnaMatrix();
+        if (position == null || this.mutantInformation.getDnaMatrix() == null) {
+            return null;
+        } else if (!isAFreePosition(position)) {
+            return null;
+        } else if (dnaMatrix.length <= position.getX()) {
+            return null;
+        } else if (dnaMatrix[position.getX()].length <= position.getY()) {
+            return null;
+        } else {
+            StringBuilder builder = new StringBuilder();
+            int maxX = Math.min(position.getX() + 4, dnaMatrix.length);
+            int actualY = position.getY();
+            for (int i = position.getX(); i < maxX; i++) {
+                builder.append(dnaMatrix[i][actualY]);
             }
             return builder.toString();
         }

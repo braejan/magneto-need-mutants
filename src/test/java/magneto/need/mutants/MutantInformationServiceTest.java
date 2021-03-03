@@ -47,7 +47,7 @@ public class MutantInformationServiceTest {
 
     @Test
     public void test_b_free_position() {
-        if (this.mutantInformation.getSequences() == null) {
+        if (this.mutantInformation.getSequences() == null || this.mutantInformation.getSequences().isEmpty()) {
             init();
         }
         Position position = new Position();
@@ -63,9 +63,8 @@ public class MutantInformationServiceTest {
 
     @Test
     public void test_get_right_elements() {
-        if (this.mutantInformation.getSequences() == null) {
-            init();
-        }
+        init();
+        this.mutantInformation.setSequences(new ArrayList<>());
         /* Example
          *    0 1 2 3 4
          * 0 |A|T|C|G|A|
@@ -102,9 +101,8 @@ public class MutantInformationServiceTest {
 
     @Test
     public void test_get_diagonal_up_elements() {
-        if (this.mutantInformation.getSequences() == null) {
-            init();
-        }
+        init();
+        this.mutantInformation.setSequences(new ArrayList<>());
         /* Example
          *    0 1 2 3 4
          * 0 |A|T|C|G|A|
@@ -140,11 +138,11 @@ public class MutantInformationServiceTest {
         result = this.mutantInformationService.getElementsFromDiagonalUp(position);
         Assertions.assertEquals("CTTT", result);
     }
+
     @Test
     public void test_get_diagonal_bottom_elements() {
-        if (this.mutantInformation.getSequences() == null) {
-            init();
-        }
+        init();
+        this.mutantInformation.setSequences(new ArrayList<>());
         /* Example
          *    0 1 2 3 4
          * 0 |A|T|C|G|A|
@@ -184,5 +182,50 @@ public class MutantInformationServiceTest {
         // [3,1] = AT
         result = this.mutantInformationService.getElementsFromDiagonalBottom(position);
         Assertions.assertEquals("AT", result);
+    }
+
+    @Test
+    public void test_get_bottom_elements() {
+        init();
+        this.mutantInformation.setSequences(new ArrayList<>());
+        /* Example
+         *    0 1 2 3 4
+         * 0 |A|T|C|G|A|
+         * 1 |T|C|G|A|T|
+         * 2 |C|G|A|T|C|
+         * 3 |G|A|T|C|G|
+         * 4 |G|C|T|A|G|
+         */
+        Position position = new Position();
+        position.setX(1);
+        position.setY(2);
+        // [1,2] = GATT
+        String result = this.mutantInformationService.getElementsFromBottom(position);
+        Assertions.assertEquals("GATT", result);
+        position.setX(1);
+        position.setY(0);
+        // [1,0] = TCGG
+        result = this.mutantInformationService.getElementsFromBottom(position);
+        Assertions.assertEquals("TCGG", result);
+        position.setX(1);
+        position.setY(1);
+        // [1,1] = CGAC
+        result = this.mutantInformationService.getElementsFromBottom(position);
+        Assertions.assertEquals("CGAC", result);
+        position.setX(0);
+        position.setY(0);
+        // [0,0] = ATCG
+        result = this.mutantInformationService.getElementsFromBottom(position);
+        Assertions.assertEquals("ATCG", result);
+        position.setX(2);
+        position.setY(2);
+        // [2,2] = ATT
+        result = this.mutantInformationService.getElementsFromBottom(position);
+        Assertions.assertEquals("ATT", result);
+        position.setX(3);
+        position.setY(1);
+        // [3,1] = AC
+        result = this.mutantInformationService.getElementsFromBottom(position);
+        Assertions.assertEquals("AC", result);
     }
 }
