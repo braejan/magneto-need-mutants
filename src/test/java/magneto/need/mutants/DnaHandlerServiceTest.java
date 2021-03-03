@@ -15,9 +15,30 @@ public class DnaHandlerServiceTest {
     private DnaHandlerService handler;
 
     @Test
-    public void test_a_real_mutant(){
-        String[] dna = {"ATGCGA","CAGTGC","TTATGT","AGAAGG","CCCCTA","TCACTG"};
+    public void test_a_real_mutant() {
+        String[] dna = {"ATGCGA", "CAGTGC", "TTATGT", "AGAAGG", "CCCCTA", "TCACTG"};
         boolean result = handler.isMutant(Arrays.asList(dna));
         Assertions.assertTrue(result);
     }
+
+    @Test
+    public void test_b_real_mutant() {
+        String[] dna = {"ATGCTGCTAC", "TGTTCTGTTT", "GAATCCCTAT", "CGGGTCCCCG", "ATGCTGGAAC", "GGTGAAGGCG", "TTGGAATTCG", "CCGCAGCCTC", "GGTGACGGAG", "GTATTCTTGT"};
+        boolean result = handler.isMutant(Arrays.asList(dna));
+        Assertions.assertTrue(result);
+    }
+    @Test
+    public void test_a_non_mutant() {
+        String[] dna = {"ATGCTGCTAC","TGTTCTGTTT","GAAACGCTAT","CGGGTCCACG","ATGCTGGAAC","GGTCAAGGCG","TTGGAATTCG","CCGCAGCCTC","GCTGACGGAG","GTATTCTTGT"};
+        boolean result = handler.isMutant(Arrays.asList(dna));
+        Assertions.assertFalse(result);
+    }
+
+    @Test
+    public void test_another_mutant() {
+        String[] dna = {"ATGCTGCTAC", "TGTTCTGTTT", "GAATCCTTAT", "CGGGTTGCCG", "ATGCTGGAAC", "GGTTAAGGCG", "TTGGAACTCG", "CCGCGGCCTC", "GGTGTCGGCG", "GTTTTCTTGC"};
+        boolean result = handler.isMutant(Arrays.asList(dna));
+        Assertions.assertTrue(result);
+    }
+
 }

@@ -4,6 +4,7 @@ import magneto.need.mutants.model.DnaSequence;
 import magneto.need.mutants.model.MutantInformation;
 import magneto.need.mutants.model.Position;
 import magneto.need.mutants.service.MutantInformationService;
+import magneto.need.mutants.util.DnaUtil;
 import magneto.need.mutants.validation.Validation;
 
 import javax.inject.Singleton;
@@ -59,7 +60,14 @@ public class MutantInformationServiceImpl implements MutantInformationService {
             int total = Math.min(position.getY() + 4, dnaMatrix[position.getX()].length);
             StringBuilder builder = new StringBuilder();
             for (int i = position.getY(); i < total; i++) {
-                builder.append(dnaMatrix[position.getX()][i]);
+                Position validatePosition = new Position();
+                validatePosition.setX(position.getX());
+                validatePosition.setY(i);
+                if (isAFreePosition(validatePosition)) {
+                    builder.append(dnaMatrix[position.getX()][i]);
+                } else {
+                    return null;
+                }
             }
             return builder.toString();
         }
@@ -82,7 +90,14 @@ public class MutantInformationServiceImpl implements MutantInformationService {
             int minX = Math.max(position.getX() - 4, 0);
             int actualY = position.getY();
             for (int i = position.getX(); i >= minX; i--) {
-                builder.append(dnaMatrix[i][actualY]);
+                Position validatePosition = new Position();
+                validatePosition.setX(i);
+                validatePosition.setY(actualY);
+                if (isAFreePosition(validatePosition)) {
+                    builder.append(dnaMatrix[i][actualY]);
+                } else {
+                    return null;
+                }
                 actualY++;
                 if (actualY == maxY) {
                     break;
@@ -109,7 +124,14 @@ public class MutantInformationServiceImpl implements MutantInformationService {
             int maxY = Math.min(position.getY() + 4, dnaMatrix.length);
             int actualY = position.getY();
             for (int i = position.getX(); i < maxX; i++) {
-                builder.append(dnaMatrix[i][actualY]);
+                Position validatePosition = new Position();
+                validatePosition.setX(i);
+                validatePosition.setY(actualY);
+                if (isAFreePosition(validatePosition)) {
+                    builder.append(dnaMatrix[i][actualY]);
+                } else {
+                    return null;
+                }
                 actualY++;
                 if (actualY == maxY) {
                     break;
@@ -135,7 +157,14 @@ public class MutantInformationServiceImpl implements MutantInformationService {
             int maxX = Math.min(position.getX() + 4, dnaMatrix.length);
             int actualY = position.getY();
             for (int i = position.getX(); i < maxX; i++) {
-                builder.append(dnaMatrix[i][actualY]);
+                Position validatePosition = new Position();
+                validatePosition.setX(i);
+                validatePosition.setY(actualY);
+                if (isAFreePosition(validatePosition)) {
+                    builder.append(dnaMatrix[i][actualY]);
+                } else {
+                    return null;
+                }
             }
             return builder.toString();
         }
