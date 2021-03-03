@@ -6,7 +6,6 @@ import magneto.need.mutants.model.Position;
 import magneto.need.mutants.service.MutantInformationService;
 
 import javax.inject.Singleton;
-import javax.sound.midi.Sequence;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -29,7 +28,7 @@ public class MutantInformationServiceImpl implements MutantInformationService {
 
     @Override
     public boolean isAFreePosition(Position position) {
-        if(this.mutantInformation.getSequences() == null){
+        if (this.mutantInformation.getSequences() == null) {
             return true;
         }
         for (DnaSequence sequence : this.mutantInformation.getSequences()) {
@@ -42,5 +41,24 @@ public class MutantInformationServiceImpl implements MutantInformationService {
             }
         }
         return true;
+    }
+
+    @Override
+    public String getElementsFromRight(Position position) {
+        char[][] dnaMatrix = this.mutantInformation.getDnaMatrix();
+        if (position == null || this.mutantInformation.getDnaMatrix() == null) {
+            return null;
+        } else if (dnaMatrix.length <= position.getX()) {
+            return null;
+        } else if (dnaMatrix[position.getX()].length <= position.getY()) {
+            return null;
+        } else {
+            int total = Math.min(position.getY() + 4, dnaMatrix[position.getX()].length);
+            StringBuilder builder = new StringBuilder();
+            for (int i = position.getY(); i < total; i++) {
+                builder.append(dnaMatrix[position.getX()][i]);
+            }
+            return builder.toString();
+        }
     }
 }
