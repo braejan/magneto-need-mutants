@@ -30,7 +30,7 @@ public class DnaRequestHandlerTest {
     @Test
     public void test_handler_ok() {
         Dna dna = new Dna();
-        dna.setDna(Arrays.asList("ATCG", "TCGA", "CGAT", "GATC"));
+        dna.setDna(Arrays.asList("ATGCGA", "CAGTGC", "TTATGT", "AGAAGG", "CCCCTA", "TCACTG"));
         ApiResponse apiResponse = DnaRequestHandler.execute(dna);
         assertNotNull(apiResponse);
         assertEquals(200, apiResponse.getStatusCode());
