@@ -45,4 +45,12 @@ public class ValidationTest {
             Validation.validate(dna);
         });
     }
+
+    @Test
+    public void test_has_unique_letters(){
+        String input = "AAAAAAAAAAA";
+        Assertions.assertTrue(Validation.hasUniqueLetter(input));
+        input =  "AAAAAAAAAAB";
+        Assertions.assertFalse(Validation.hasUniqueLetter(input));
+    }
 }

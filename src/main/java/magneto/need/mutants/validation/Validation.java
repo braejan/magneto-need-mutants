@@ -23,8 +23,18 @@ public final class Validation {
         List<String> finalItems = input.getDna().stream()
                 .filter(item -> item == null || item.length() != total || !item.matches("[A|T|C|G]{4}"))
                 .collect(Collectors.toList());
-        if (finalItems != null && finalItems.size() > 0){
+        if (finalItems != null && finalItems.size() > 0) {
             throw new DimensionException("All items should be had a length of " + total);
         }
+    }
+
+    public static boolean hasUniqueLetter(String input) {
+        String result = input.chars().distinct()
+                .mapToObj(c -> String.valueOf((char) c))
+                .collect(Collectors.joining());
+        if (result.length() == 1) {
+            return true;
+        }
+        return false;
     }
 }
