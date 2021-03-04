@@ -20,9 +20,11 @@ micronaut {
 }
 
 dependencies {
+    implementation platform('software.amazon.awssdk:bom:2.15.0')
     implementation("io.micronaut:micronaut-validation")
     implementation("io.micronaut:micronaut-runtime")
     runtimeOnly("ch.qos.logback:logback-classic")
+    implementation 'software.amazon.awssdk:dynamodb'
     testImplementation("io.micronaut:micronaut-http-client")
 }
 

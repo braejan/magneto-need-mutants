@@ -1,5 +1,6 @@
 package magneto.need.mutants.service.impl;
 
+import magneto.need.mutants.dynamodb.MutantsDb;
 import magneto.need.mutants.exception.DimensionException;
 import magneto.need.mutants.model.MutantInformation;
 import magneto.need.mutants.model.Position;
@@ -85,6 +86,9 @@ public class DnaHandlerServiceImpl implements DnaHandlerService {
                     }
                 }
             }
+        }
+        if (hasMutantDnaSequence()) {
+            MutantsDb.saveMutantInformation(dna);
         }
         return hasMutantDnaSequence();
     }
