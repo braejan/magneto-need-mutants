@@ -8,8 +8,10 @@ import com.amazonaws.serverless.proxy.model.AwsProxyResponse;
 import com.amazonaws.services.lambda.runtime.Context;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.micronaut.http.*;
-import magneto.need.mutants.model.ApiResponse;
+import io.micronaut.http.HttpHeaders;
+import io.micronaut.http.HttpMethod;
+import io.micronaut.http.HttpStatus;
+import io.micronaut.http.MediaType;
 import magneto.need.mutants.model.Dna;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
@@ -54,7 +56,7 @@ public class DnaControllerTest {
     }
 
     @Test
-    void test_erro_api_call() throws JsonProcessingException {
+    void test_error_api_call() throws JsonProcessingException {
         Dna dna = new Dna();
         dna.setDna(Arrays.asList("ATGCGA", "CAGTGC", "TTATGT", "AGPAGG", "CCCCTA", "TCACTG"));
         String json = objectMapper.writeValueAsString(dna);
