@@ -3,6 +3,7 @@ package magneto.need.mutants;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import magneto.need.mutants.handler.DnaRequestHandler;
 import magneto.need.mutants.model.ApiResponse;
 import magneto.need.mutants.model.Dna;
 import org.junit.jupiter.api.AfterAll;
@@ -13,7 +14,7 @@ import java.util.Arrays;
 
 public class DnaRequestHandlerTest {
 
-    private static DnaRequestHandler DnaRequestHandler;
+    private static magneto.need.mutants.handler.DnaRequestHandler DnaRequestHandler;
 
     @BeforeAll
     public static void setupServer() {

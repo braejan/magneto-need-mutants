@@ -1,11 +1,13 @@
 package magneto.need.mutants.model;
 
+import io.micronaut.core.annotation.Introspected;
 import io.reactivex.annotations.NonNull;
 
 import javax.validation.constraints.NotBlank;
 import java.util.List;
 import java.util.Objects;
 
+@Introspected
 public class DnaSequence {
     @NonNull
     @NotBlank

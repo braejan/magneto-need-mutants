@@ -4,8 +4,6 @@ import magneto.need.mutants.model.DnaSequence;
 import magneto.need.mutants.model.MutantInformation;
 import magneto.need.mutants.model.Position;
 import magneto.need.mutants.service.MutantInformationService;
-import magneto.need.mutants.util.DnaUtil;
-import magneto.need.mutants.validation.Validation;
 
 import javax.inject.Singleton;
 import java.util.ArrayList;

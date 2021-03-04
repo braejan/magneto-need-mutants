@@ -1,7 +1,9 @@
 package magneto.need.mutants.model;
 
-import java.util.Objects;
+import io.micronaut.core.annotation.Introspected;
 
+import java.util.Objects;
+@Introspected
 public class Position {
     private int x;
     private int y;

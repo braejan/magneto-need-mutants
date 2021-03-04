@@ -10,7 +10,7 @@
 
 [AWS Lambda Handler](https://docs.aws.amazon.com/lambda/latest/dg/java-handler.html)
 
-Handler: magneto.need.mutants.BookRequestHandler
+Handler: magneto.need.mutants
 
 ## Feature aws-lambda documentation
 
