@@ -5,7 +5,6 @@ import io.micronaut.function.aws.MicronautRequestHandler;
 import magneto.need.mutants.model.ApiResponse;
 import magneto.need.mutants.model.Dna;
 import magneto.need.mutants.service.DnaHandlerService;
-import magneto.need.mutants.validation.Validation;
 
 import javax.inject.Inject;
 

@@ -12,9 +12,9 @@ import java.util.Arrays;
 import java.util.List;
 
 @MicronautTest
-public class DnaUtilTest {
+class DnaUtilTest {
     @Test
-    public void test_array_conversion_ok() {
+    void test_array_conversion_ok() {
         List<String> input = Arrays.asList("ATCG", "TCGA", "CGAT", "GATC");
         char[][] response = DnaUtil.convertDnaList(input);
         Assertions.assertNotNull(response);
@@ -26,19 +26,19 @@ public class DnaUtilTest {
     }
 
     @Test
-    public void test_array_conversion_null() {
+    void test_array_conversion_null() {
         char[][] response = DnaUtil.convertDnaList(null);
         Assertions.assertNull(response);
     }
 
     @Test
-    public void test_array_conversion_empty() {
+    void test_array_conversion_empty() {
         char[][] response = DnaUtil.convertDnaList(new ArrayList<>());
         Assertions.assertNull(response);
     }
 
     @Test
-    public void test_create_dna_sequence_right() {
+    void test_create_dna_sequence_right() {
         DnaSequence expected = new DnaSequence();
         expected.setLetter("A");
         expected.setPositions(new ArrayList<>());
@@ -66,7 +66,7 @@ public class DnaUtilTest {
     }
 
     @Test
-    public void test_create_dna_sequence_diagonal_up() {
+    void test_create_dna_sequence_diagonal_up() {
         DnaSequence expected = new DnaSequence();
         expected.setLetter("A");
         expected.setPositions(new ArrayList<>());
@@ -94,7 +94,7 @@ public class DnaUtilTest {
     }
 
     @Test
-    public void test_create_dna_sequence_diagonal_down() {
+    void test_create_dna_sequence_diagonal_down() {
         DnaSequence expected = new DnaSequence();
         expected.setLetter("A");
         expected.setPositions(new ArrayList<>());
@@ -122,7 +122,7 @@ public class DnaUtilTest {
     }
 
     @Test
-    public void test_create_dna_sequence_bottom() {
+    void test_create_dna_sequence_bottom() {
         DnaSequence expected = new DnaSequence();
         expected.setLetter("A");
         expected.setPositions(new ArrayList<>());
@@ -150,7 +150,7 @@ public class DnaUtilTest {
     }
 
     @Test
-    public void test_create_dna_sequence_diagonal_null() {
+    void test_create_dna_sequence_diagonal_null() {
         DnaSequence expected = new DnaSequence();
         expected.setLetter("A");
         expected.setPositions(new ArrayList<>());

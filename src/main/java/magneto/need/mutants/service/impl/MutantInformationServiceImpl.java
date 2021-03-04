@@ -36,7 +36,7 @@ public class MutantInformationServiceImpl implements MutantInformationService {
                     .stream()
                     .filter(sequencePosition -> sequencePosition.equals(position))
                     .collect(Collectors.toList());
-            if (positions != null && positions.size() > 0) {
+            if (!positions.isEmpty()) {
                 return false;
             }
         }

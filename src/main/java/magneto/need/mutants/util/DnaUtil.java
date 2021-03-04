@@ -17,7 +17,7 @@ public final class DnaUtil {
 
     public static char[][] convertDnaList(List<String> list) {
         final char[][] result;
-        if (list != null && list.size() > 0) {
+        if (list != null && !list.isEmpty()) {
             result = new char[list.size()][list.size()];
             for (int i = 0; i < list.size(); i++) {
                 result[i] = list.get(i).toCharArray();

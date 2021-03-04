@@ -21,7 +21,7 @@ import io.micronaut.function.aws.proxy.MicronautLambdaHandler;
 
 import java.util.Arrays;
 
-public class DnaControllerTest {
+class DnaControllerTest {
     private static MicronautLambdaHandler handler;
     private static Context lambdaContext = new MockLambdaContext();
     private static ObjectMapper objectMapper;

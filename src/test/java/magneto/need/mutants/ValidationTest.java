@@ -12,11 +12,11 @@ import org.slf4j.LoggerFactory;
 import java.util.Arrays;
 
 @MicronautTest
-public class ValidationTest {
+class ValidationTest {
     private static final Logger LOGGER = LoggerFactory.getLogger(ValidationTest.class);
 
     @Test
-    public void test_correct_input() {
+    void test_correct_input() {
         try {
             Validation.validate(Arrays.asList("ATGCGA", "CAGTGC", "CAGTGC", "AGAAGG", "CCCCTA", "TCACTG"));
             Assertions.assertTrue(true);
@@ -27,21 +27,21 @@ public class ValidationTest {
     }
 
     @Test
-    public void test_incorrect_input() throws DimensionException {
+    void test_incorrect_input() throws DimensionException {
         Assertions.assertThrows(DimensionException.class, () -> {
             Validation.validate(Arrays.asList("ABCD", "ACBD", "ADCB", "ADCB", "BBBB"));
         });
     }
 
     @Test
-    public void test_incorrect_input_with_3_letters() throws DimensionException {
+    void test_incorrect_input_with_3_letters() throws DimensionException {
         Assertions.assertThrows(DimensionException.class, () -> {
             Validation.validate(Arrays.asList("ABCD", "ACB", "ADCB", "ADB"));
         });
     }
 
     @Test
-    public void test_has_unique_letters() {
+    void test_has_unique_letters() {
         String input = "AAAAAAAAAAA";
         Assertions.assertTrue(Validation.hasUniqueLetter(input));
         input = "AAAAAAAAAAB";
@@ -49,7 +49,7 @@ public class ValidationTest {
     }
 
     @Test
-    public void test_a_mutant_sequence() {
+    void test_a_mutant_sequence() {
         String input = "AAAA";
         Assertions.assertTrue(Validation.isAMutantSequence(input));
         input = "AAAAAAAAAAB";

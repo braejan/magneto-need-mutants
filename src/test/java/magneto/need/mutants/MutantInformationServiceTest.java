@@ -15,7 +15,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @MicronautTest
-public class MutantInformationServiceTest {
+class MutantInformationServiceTest {
     @Inject
     private MutantInformationService mutantInformationService;
 
@@ -38,7 +38,7 @@ public class MutantInformationServiceTest {
     }
 
     @Test
-    public void test_a_update_mutant_information() {
+    void test_a_update_mutant_information() {
         this.mutantInformation.setSequences(null);
         init();
         Assertions.assertEquals(1, mutantInformation.getSequences().size());
@@ -46,7 +46,7 @@ public class MutantInformationServiceTest {
     }
 
     @Test
-    public void test_b_free_position() {
+    void test_b_free_position() {
         if (this.mutantInformation.getSequences() == null || this.mutantInformation.getSequences().isEmpty()) {
             init();
         }
@@ -62,7 +62,7 @@ public class MutantInformationServiceTest {
     }
 
     @Test
-    public void test_get_right_elements() {
+    void test_get_right_elements() {
         init();
         this.mutantInformation.setSequences(new ArrayList<>());
         /* Example
@@ -100,7 +100,7 @@ public class MutantInformationServiceTest {
     }
 
     @Test
-    public void test_get_diagonal_up_elements() {
+    void test_get_diagonal_up_elements() {
         init();
         this.mutantInformation.setSequences(new ArrayList<>());
         /* Example
@@ -140,7 +140,7 @@ public class MutantInformationServiceTest {
     }
 
     @Test
-    public void test_get_diagonal_bottom_elements() {
+    void test_get_diagonal_bottom_elements() {
         init();
         this.mutantInformation.setSequences(new ArrayList<>());
         /* Example
@@ -185,7 +185,7 @@ public class MutantInformationServiceTest {
     }
 
     @Test
-    public void test_get_bottom_elements() {
+    void test_get_bottom_elements() {
         init();
         this.mutantInformation.setSequences(new ArrayList<>());
         /* Example

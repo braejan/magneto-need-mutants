@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 
-public class DnaRequestHandlerTest {
+class DnaRequestHandlerTest {
 
     private static magneto.need.mutants.handler.DnaRequestHandler DnaRequestHandler;
 
@@ -29,7 +29,7 @@ public class DnaRequestHandlerTest {
     }
 
     @Test
-    public void test_handler_ok() {
+    void test_handler_ok() {
         Dna dna = new Dna();
         dna.setDna(Arrays.asList("ATGCGA", "CAGTGC", "TTATGT", "AGAAGG", "CCCCTA", "TCACTG"));
         ApiResponse apiResponse = DnaRequestHandler.execute(dna);
@@ -38,7 +38,7 @@ public class DnaRequestHandlerTest {
     }
 
     @Test
-    public void test_handler_error() {
+    void test_handler_error() {
         Dna dna = new Dna();
         dna.setDna(Arrays.asList("BDA", "TCGA", "CGAT", "GATC"));
         ApiResponse apiResponse = DnaRequestHandler.execute(dna);

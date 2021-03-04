@@ -1,18 +1,40 @@
-## Micronaut 2.3.4 Documentation
-
-- [User Guide](https://docs.micronaut.io/2.3.4/guide/index.html)
-- [API Reference](https://docs.micronaut.io/2.3.4/api/index.html)
-- [Configuration Reference](https://docs.micronaut.io/2.3.4/guide/configurationreference.html)
-- [Micronaut Guides](https://guides.micronaut.io/index.html)
+## Magneto needs mutants
+Magneto wants to recruit as many mutants as possible, so he can fight the X-Men.
+For this reason I have developed a Rest API that detects if a
+human is mutant based on its DNA sequence
 ---
+Next project was developed with [Micronaut framework](https://micronaut.io) using `aws-lambda` features.
 
-## Handler
+## Test application
+Check this project out, cd into the directory and run:
 
-[AWS Lambda Handler](https://docs.aws.amazon.com/lambda/latest/dg/java-handler.html)
+    ./gradlew test
 
-Handler: magneto.need.mutants
+This will test application.
+## Build application
+Check this project out, cd into the directory and run:
 
-## Feature aws-lambda documentation
+    ./gradlew shadowJar
 
-- [Micronaut AWS Lambda Function documentation](https://micronaut-projects.github.io/micronaut-aws/latest/guide/index.html#lambda)
+Next cd into build/libs. In there, you find the jar `magneto-need-mutants-0.1-all.jar`.
 
+---
+## Check it out yourself
+For test REST API you need consume the API with next json
+```json
+{
+  "dna":[
+    "ATGCTGCTAC",
+    "TGTTCTGTTT",
+    "GAAGCCCTAT",
+    "CGGGTTGCCG",
+    "ATGCTGGAAC",
+    "GGTTAAGGCG",
+    "TTGGAACTCG",
+    "CCGCGGCCTC",
+    "GGTGTCTGCG",
+    "GTTTTCTTGC"
+  ]
+}
+```
+Send a POST request to this endpoint https://da1ipalpf7.execute-api.us-east-2.amazonaws.com/prod/mutant
