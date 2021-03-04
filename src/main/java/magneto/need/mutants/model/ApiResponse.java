@@ -4,6 +4,7 @@ import edu.umd.cs.findbugs.annotations.NonNull;
 import io.micronaut.core.annotation.Introspected;
 
 import javax.validation.constraints.NotBlank;
+import java.util.Objects;
 
 @Introspected
 public class ApiResponse {
@@ -14,9 +15,6 @@ public class ApiResponse {
     @NonNull
     @NotBlank
     private String body;
-
-    public ApiResponse() {
-    }
 
     public int getStatusCode() {
         return statusCode;
@@ -33,5 +31,26 @@ public class ApiResponse {
 
     public void setBody(@NonNull String body) {
         this.body = body;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ApiResponse)) return false;
+        ApiResponse that = (ApiResponse) o;
+        return statusCode == that.statusCode && body.equals(that.body);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(statusCode, body);
+    }
+
+    @Override
+    public String toString() {
+        return "ApiResponse{" +
+                "statusCode=" + statusCode +
+                ", body='" + body + '\'' +
+                '}';
     }
 }
