@@ -2,6 +2,9 @@
 
 Magneto wants to recruit as many mutants as possible, so he can fight the X-Men. For this reason I have developed a Rest
 API that detects if a human is mutant based on its DNA sequence
+
+![alt text](https://raw.githubusercontent.com/BrayanAriasH/magneto-need-mutants/master/src/main/resources/dnamutants.png)
+
 ---
 Next project was developed with [Micronaut framework](https://micronaut.io) using `aws-lambda` features.
 
