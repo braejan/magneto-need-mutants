@@ -19,18 +19,7 @@ public class MutantInformationServiceImpl implements MutantInformationService {
     }
 
     @Override
-    public void updateMutantInformation(DnaSequence sequence) {
-        if (this.mutantInformation.getSequences() == null) {
-            this.mutantInformation.setSequences(new ArrayList<>());
-        }
-        this.mutantInformation.getSequences().add(sequence);
-    }
-
-    @Override
     public boolean isAFreePosition(Position position) {
-        if (this.mutantInformation.getSequences() == null) {
-            return true;
-        }
         for (DnaSequence sequence : this.mutantInformation.getSequences()) {
             List<Position> positions = sequence.getPositions()
                     .stream()
@@ -43,16 +32,24 @@ public class MutantInformationServiceImpl implements MutantInformationService {
         return true;
     }
 
+    private boolean hasErrors(Position position) {
+        if (position == null || this.mutantInformation.getDnaMatrix() == null) {
+            return true;
+        } else if (!isAFreePosition(position)) {
+            return true;
+        } else if (this.mutantInformation.getDnaMatrix().length <= position.getX()) {
+            return true;
+        } else if (this.mutantInformation.getDnaMatrix()[position.getX()].length <= position.getY()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     @Override
     public String getElementsFromRight(Position position) {
         char[][] dnaMatrix = this.mutantInformation.getDnaMatrix();
-        if (position == null || this.mutantInformation.getDnaMatrix() == null) {
-            return null;
-        } else if (!isAFreePosition(position)) {
-            return null;
-        } else if (dnaMatrix.length <= position.getX()) {
-            return null;
-        } else if (dnaMatrix[position.getX()].length <= position.getY()) {
+        if (hasErrors(position)) {
             return null;
         } else {
             int total = Math.min(position.getY() + 4, dnaMatrix[position.getX()].length);
@@ -74,13 +71,7 @@ public class MutantInformationServiceImpl implements MutantInformationService {
     @Override
     public String getElementsFromDiagonalUp(Position position) {
         char[][] dnaMatrix = this.mutantInformation.getDnaMatrix();
-        if (position == null || this.mutantInformation.getDnaMatrix() == null) {
-            return null;
-        } else if (!isAFreePosition(position)) {
-            return null;
-        } else if (dnaMatrix.length <= position.getX()) {
-            return null;
-        } else if (dnaMatrix[position.getX()].length <= position.getY()) {
+        if (hasErrors(position)) {
             return null;
         } else {
             StringBuilder builder = new StringBuilder();
@@ -108,13 +99,7 @@ public class MutantInformationServiceImpl implements MutantInformationService {
     @Override
     public String getElementsFromDiagonalBottom(Position position) {
         char[][] dnaMatrix = this.mutantInformation.getDnaMatrix();
-        if (position == null || this.mutantInformation.getDnaMatrix() == null) {
-            return null;
-        } else if (!isAFreePosition(position)) {
-            return null;
-        } else if (dnaMatrix.length <= position.getX()) {
-            return null;
-        } else if (dnaMatrix[position.getX()].length <= position.getY()) {
+        if (hasErrors(position)) {
             return null;
         } else {
             StringBuilder builder = new StringBuilder();
@@ -142,13 +127,7 @@ public class MutantInformationServiceImpl implements MutantInformationService {
     @Override
     public String getElementsFromBottom(Position position) {
         char[][] dnaMatrix = this.mutantInformation.getDnaMatrix();
-        if (position == null || this.mutantInformation.getDnaMatrix() == null) {
-            return null;
-        } else if (!isAFreePosition(position)) {
-            return null;
-        } else if (dnaMatrix.length <= position.getX()) {
-            return null;
-        } else if (dnaMatrix[position.getX()].length <= position.getY()) {
+        if (hasErrors(position)) {
             return null;
         } else {
             StringBuilder builder = new StringBuilder();

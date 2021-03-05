@@ -41,17 +41,4 @@ public class DnaSequence {
         DnaSequence that = (DnaSequence) o;
         return letter.equals(that.letter) && positions.equals(that.positions);
     }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(letter, positions);
-    }
-
-    @Override
-    public String toString() {
-        return "DnaSequence{" +
-                "letter='" + letter + '\'' +
-                ", positions=" + positions +
-                '}';
-    }
 }

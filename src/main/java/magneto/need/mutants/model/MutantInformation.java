@@ -24,21 +24,6 @@ public class MutantInformation {
         this.sequences = sequences;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof MutantInformation)) return false;
-        MutantInformation that = (MutantInformation) o;
-        return sequences.equals(that.sequences) && Arrays.equals(dnaMatrix, that.dnaMatrix);
-    }
-
-    @Override
-    public int hashCode() {
-        int result = Objects.hash(sequences);
-        result = 31 * result + Arrays.hashCode(dnaMatrix);
-        return result;
-    }
-
     @NonNull
     public char[][] getDnaMatrix() {
         return dnaMatrix;
@@ -46,13 +31,5 @@ public class MutantInformation {
 
     public void setDnaMatrix(@NonNull char[][] dnaMatrix) {
         this.dnaMatrix = dnaMatrix;
-    }
-
-    @Override
-    public String toString() {
-        return "MutantInformation{" +
-                "sequences=" + sequences +
-                ", dnaMatrix=" + Arrays.toString(dnaMatrix) +
-                '}';
     }
 }

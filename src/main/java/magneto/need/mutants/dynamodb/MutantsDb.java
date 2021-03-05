@@ -17,6 +17,13 @@ import java.util.Objects;
 public class MutantsDb {
     private static final Logger LOGGER = LoggerFactory.getLogger(MutantsDb.class);
 
+    private static DynamoDbClient getClient() {
+        Region region = Region.US_EAST_2;
+        return DynamoDbClient.builder()
+                .region(region)
+                .build();
+    }
+
     public static void saveMutantInformation(List<String> dna, boolean isMutant) {
         HashMap<String, AttributeValue> itemValues = new HashMap<>();
         // Add all content to the table
@@ -34,10 +41,7 @@ public class MutantsDb {
                 .tableName("mutants")
                 .item(itemValues)
                 .build();
-        Region region = Region.US_EAST_2;
-        try (DynamoDbClient ddb = DynamoDbClient.builder()
-                .region(region)
-                .build()) {
+        try (DynamoDbClient ddb = getClient()) {
             ddb.putItem(request);
             updateStatistics(isMutant);
         } catch (DynamoDbException e) {
@@ -45,19 +49,15 @@ public class MutantsDb {
         }
     }
 
-    private static void updateStatistics(boolean isMutant) {
-        Region region = Region.US_EAST_2;
+    public static void updateStatistics(boolean isMutant) {
         HashMap<String, AttributeValue> keyToGet = new HashMap<>();
-
         keyToGet.put("Process", AttributeValue.builder()
                 .s("mutantAnalysis").build());
         GetItemRequest getItemRequest = GetItemRequest.builder()
                 .tableName("processcontrol")
                 .key(keyToGet)
                 .build();
-        try (DynamoDbClient ddb = DynamoDbClient.builder()
-                .region(region)
-                .build()) {
+        try (DynamoDbClient ddb = getClient()) {
             GetItemResponse response = ddb.getItem(getItemRequest);
             int mutantCount = 0;
             int humanCount = 0;
@@ -92,19 +92,15 @@ public class MutantsDb {
         }
     }
 
-    private static boolean existsId(int hash) {
-        Region region = Region.US_EAST_2;
+    public static boolean existsId(int hash) {
         HashMap<String, AttributeValue> keyToGet = new HashMap<>();
-
         keyToGet.put("MutantId", AttributeValue.builder()
                 .n(String.valueOf(hash)).build());
         GetItemRequest getItemRequest = GetItemRequest.builder()
                 .tableName("mutants")
                 .key(keyToGet)
                 .build();
-        try (DynamoDbClient ddb = DynamoDbClient.builder()
-                .region(region)
-                .build()) {
+        try (DynamoDbClient ddb = getClient()) {
             GetItemResponse response = ddb.getItem(getItemRequest);
             return response.item().get("MutantId") != null;
         } catch (DynamoDbException e) {

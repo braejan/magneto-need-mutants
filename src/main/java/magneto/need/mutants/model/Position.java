@@ -3,6 +3,7 @@ package magneto.need.mutants.model;
 import io.micronaut.core.annotation.Introspected;
 
 import java.util.Objects;
+
 @Introspected
 public class Position {
     private int x;
@@ -30,18 +31,5 @@ public class Position {
         if (!(o instanceof Position)) return false;
         Position position = (Position) o;
         return x == position.x && y == position.y;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(x, y);
-    }
-
-    @Override
-    public String toString() {
-        return "Position{" +
-                "x=" + x +
-                ", y=" + y +
-                '}';
     }
 }
