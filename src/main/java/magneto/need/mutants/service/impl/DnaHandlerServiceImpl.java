@@ -26,7 +26,7 @@ public class DnaHandlerServiceImpl implements DnaHandlerService {
         this.mutantInformationService = mutantInformationService;
     }
 
-    private boolean hasMutantDnaSequence() {
+    private boolean hasMutantDnaSequence(List<String> dna) {
         return this.mutantInformation.getSequences().size() == 3;
     }
 
@@ -41,13 +41,6 @@ public class DnaHandlerServiceImpl implements DnaHandlerService {
 
     @Override
     public boolean isMutant(List<String> dna) {
-        //Validate dna
-        try {
-            Validation.validate(dna);
-        } catch (DimensionException e) {
-            LOGGER.error("Error on isMutant", e);
-            return false;
-        }
         //Initialize mutantInformation
         this.mutantInformation.setSequences(new ArrayList<>());
         this.mutantInformation.setDnaMatrix(DnaUtil.convertDnaList(dna));
@@ -60,36 +53,33 @@ public class DnaHandlerServiceImpl implements DnaHandlerService {
                 String resultRight = this.mutantInformationService.getElementsFromRight(position);
                 if (Validation.isAMutantSequence(resultRight)) {
                     addDnaSequence(DnaUtil.RIGHT_TYPE, position, resultRight);
-                    if (hasMutantDnaSequence()) {
+                    if (hasMutantDnaSequence(dna)) {
                         return true;
                     }
                 }
                 String resultDiagonalUp = this.mutantInformationService.getElementsFromDiagonalUp(position);
                 if (Validation.isAMutantSequence(resultDiagonalUp)) {
                     addDnaSequence(DnaUtil.DIAGONAL_UP_TYPE, position, resultDiagonalUp);
-                    if (hasMutantDnaSequence()) {
+                    if (hasMutantDnaSequence(dna)) {
                         return true;
                     }
                 }
                 String resultDiagonalDown = this.mutantInformationService.getElementsFromDiagonalBottom(position);
                 if (Validation.isAMutantSequence(resultDiagonalDown)) {
                     addDnaSequence(DnaUtil.DIAGONAL_DOWN_TYPE, position, resultDiagonalDown);
-                    if (hasMutantDnaSequence()) {
+                    if (hasMutantDnaSequence(dna)) {
                         return true;
                     }
                 }
                 String resultDiagonalBottom = this.mutantInformationService.getElementsFromBottom(position);
                 if (Validation.isAMutantSequence(resultDiagonalBottom)) {
                     addDnaSequence(DnaUtil.DIAGONAL_DOWN_TYPE, position, resultDiagonalBottom);
-                    if (hasMutantDnaSequence()) {
+                    if (hasMutantDnaSequence(dna)) {
                         return true;
                     }
                 }
             }
         }
-        if (hasMutantDnaSequence()) {
-            MutantsDb.saveMutantInformation(dna);
-        }
-        return hasMutantDnaSequence();
+        return hasMutantDnaSequence(dna);
     }
 }
