@@ -58,7 +58,20 @@ class DnaControllerTest {
     @Test
     void test_error_api_call() throws JsonProcessingException {
         Dna dna = new Dna();
-        dna.setDna(Arrays.asList("ATGCGA", "CAGTGC", "TTATGT", "AGPAGG", "CCCCTA", "TCACTG"));
+        dna.setDna(Arrays.asList("ATGCTGCTAC", "TGTTCTGTTT", "GAAACGCTAT", "CGGGTCCACG", "ATGCTGGAAC", "GGTCAAGGCG", "TTGGAATTCG", "CCGCAGCCTC", "GCTGACGGAG", "GTATTCTTGT"));
+        String json = objectMapper.writeValueAsString(dna);
+        AwsProxyRequest request = new AwsProxyRequestBuilder("/mutant/", HttpMethod.POST.toString())
+                .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON)
+                .body(json)
+                .build();
+        AwsProxyResponse response = handler.handleRequest(request, lambdaContext);
+        Assertions.assertEquals(HttpStatus.FORBIDDEN.getCode(), response.getStatusCode());
+    }
+
+    @Test
+    void test_error_validation_call() throws JsonProcessingException {
+        Dna dna = new Dna();
+        dna.setDna(Arrays.asList("ATGCTGCTAC", "TGTTKTGTTT", "GAAACGCTAT", "CGGGTCCACG", "ATGCTGGAAC", "GGTCAAGGCG", "TTGGAATTCG", "CCGCAGCCTC", "GCTGACGGAG", "GTATTCTTGT"));
         String json = objectMapper.writeValueAsString(dna);
         AwsProxyRequest request = new AwsProxyRequestBuilder("/mutant/", HttpMethod.POST.toString())
                 .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON)

@@ -32,7 +32,8 @@ class MutantInformationServiceTest {
             position.setY(i);
             sequence.getPositions().add(position);
         }
-        mutantInformationService.updateMutantInformation(sequence);
+        mutantInformation.setSequences(new ArrayList<>());
+        mutantInformation.getSequences().add(sequence);
         List<String> dnaList = Arrays.asList("ATCGA", "TCGAT", "CGATC", "GATCG", "GCTAG");
         mutantInformation.setDnaMatrix(DnaUtil.convertDnaList(dnaList));
     }
