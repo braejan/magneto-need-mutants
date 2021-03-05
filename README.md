@@ -6,6 +6,12 @@ API that detects if a human is mutant based on its DNA sequence
 ![alt text](https://raw.githubusercontent.com/BrayanAriasH/magneto-need-mutants/master/src/main/resources/dnamutants.png)
 
 ---
+
+## Code coverage
+
+This is the code coverage jacoco reports
+![alt text](https://raw.githubusercontent.com/BrayanAriasH/magneto-need-mutants/master/src/main/resources/code_coverage.png)
+
 Next project was developed with [Micronaut framework](https://micronaut.io) using `aws-lambda` features.
 
 ## Test application
