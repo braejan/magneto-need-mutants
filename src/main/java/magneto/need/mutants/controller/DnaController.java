@@ -32,7 +32,11 @@ public class DnaController {
             return HttpResponse.badRequest().status(403);
         }
         final boolean isMutant = dnaHandlerService.isMutant(dna.getDna());
-        MutantsDb.saveMutantInformation(dna.getDna(), isMutant);
+        try {
+            MutantsDb.saveMutantInformation(dna.getDna(), isMutant);
+        } catch (Exception e) {
+            LOGGER.error("Error saving mutant information", e);
+        }
         if (isMutant) {
             return HttpResponse.ok();
         } else {
