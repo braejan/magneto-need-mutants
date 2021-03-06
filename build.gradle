@@ -24,9 +24,12 @@ dependencies {
     implementation platform('software.amazon.awssdk:bom:2.15.0')
     implementation("io.micronaut:micronaut-validation")
     implementation("io.micronaut:micronaut-runtime")
-    runtimeOnly("ch.qos.logback:logback-classic")
     implementation 'software.amazon.awssdk:dynamodb'
+    runtimeOnly("ch.qos.logback:logback-classic")
     testImplementation("io.micronaut:micronaut-http-client")
+    testImplementation("io.micronaut.test:micronaut-test-junit5:1.0.0")
+    testImplementation("org.mockito:mockito-junit-jupiter:2.22.0")
+    testImplementation ("org.mockito:mockito-inline:3.8.0")
 }
 
 
@@ -40,6 +43,7 @@ java {
 }
 
 test {
+    useJUnitPlatform()
     finalizedBy jacocoTestReport // report is always generated after tests run
 }
 jacocoTestReport {
@@ -57,5 +61,5 @@ jacocoTestReport {
 }
 jacoco {
     toolVersion = "0.8.6"
-    reportsDirectory = file("$buildDir/jacoco")
+    reportsDirectory = file("$buildDir/jacocoDir")
 }

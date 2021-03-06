@@ -164,4 +164,11 @@ class DnaUtilTest {
         result = DnaUtil.createDnaSequence(null, position, -3);
         Assertions.assertNull(result);
     }
+
+    @Test
+    void test_ratio() {
+        int param1 = 40;
+        int param2 = 100;
+        Assertions.assertEquals(0.4, DnaUtil.ratio(param1, param2));
+    }
 }
