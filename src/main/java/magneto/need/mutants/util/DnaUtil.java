@@ -72,4 +72,11 @@ public final class DnaUtil {
                 return null;
         }
     }
+
+    public static double ratio(int param1, int param2) {
+        if (param1 < 1 || param2 < 1) {
+            return 0;
+        }
+        return ((double) param1 / (double) param2);
+    }
 }
