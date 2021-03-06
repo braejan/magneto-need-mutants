@@ -28,7 +28,7 @@ Check this project out, cd into the directory and run:
 
     ./gradlew shadowJar
 
-Next cd into build/libs. In there, you find the jar `magneto-need-mutants-0.1-all.jar`.
+Next cd into build/libs. In there, you find the jar `magneto-need-mutants-0.2-all.jar`.
 
 ---
 
@@ -54,3 +54,7 @@ For test REST API you need consume the API with a json like this:
 ```
 
 Send a POST request to this endpoint https://da1ipalpf7.execute-api.us-east-2.amazonaws.com/prod/mutant
+
+
+For check statistics please check this url: https://da1ipalpf7.execute-api.us-east-2.amazonaws.com/prod/stats
+

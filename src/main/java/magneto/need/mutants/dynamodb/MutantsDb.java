@@ -123,12 +123,12 @@ public class MutantsDb {
 
     public Stat getStatistics(DynamoDbClient ddb) {
         GetItemResponse response = getStatisticsFromDynamo(ddb);
-        int mutantCount = Integer.parseInt(response.item().get("MutantCount").n());
-        int humanCount = Integer.parseInt(response.item().get("HumanCount").n());
+        Integer mutantCount = Integer.parseInt(response.item().get("MutantCount").n());
+        Integer humanCount = Integer.parseInt(response.item().get("HumanCount").n());
         Stat stat = new Stat();
         stat.setCountMutantDna(mutantCount);
         stat.setCountHumanDna(humanCount);
         stat.setRatio(DnaUtil.ratio(mutantCount, humanCount));
-        return new Stat();
+        return stat;
     }
 }
