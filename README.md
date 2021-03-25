@@ -53,8 +53,3 @@ For test REST API you need consume the API with a json like this:
 }
 ```
 
-Send a POST request to this endpoint https://da1ipalpf7.execute-api.us-east-2.amazonaws.com/prod/mutant
-
-
-For check statistics please check this url: https://da1ipalpf7.execute-api.us-east-2.amazonaws.com/prod/stats
-
